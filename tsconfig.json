@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2022"],
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {}
+  },
+  "include": ["./src/**/*.ts"]
+}

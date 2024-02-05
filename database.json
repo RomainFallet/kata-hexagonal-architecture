@@ -1,0 +1,10 @@
+{
+  "db": {
+    "driver": "pg",
+    "user": { "ENV": "HEXAGONAL_ARCHITECTURE_DB_USER" },
+    "password": { "ENV": "HEXAGONAL_ARCHITECTURE_DB_PASSWORD" },
+    "host": { "ENV": "HEXAGONAL_ARCHITECTURE_DB_HOSTNAME" },
+    "database": { "ENV": "HEXAGONAL_ARCHITECTURE_DB_NAME" },
+    "port": "5432"
+  }
+}
