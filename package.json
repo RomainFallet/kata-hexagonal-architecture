@@ -33,6 +33,7 @@
     "body-parser": "^1.0.0",
     "express": "^4.0.0",
     "express-json-validator-middleware": "^3.0.0",
+    "json-schema": "^0.4.0",
     "pg": "^8.0.0"
   },
   "devDependencies": {
@@ -59,6 +60,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unicorn": "^49.0.0",
+    "eslint-plugin-functional": "^6.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.0.0",
     "npm-run-all": "^4.0.0",

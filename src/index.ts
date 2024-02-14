@@ -4,7 +4,7 @@ import express, {
   type Request,
   type Response
 } from 'express'
-import { Validator, ValidationError } from 'express-json-validator-middleware'
+import { ValidationError, Validator } from 'express-json-validator-middleware'
 import { type JSONSchema7 } from 'json-schema'
 import pg from 'pg'
 
@@ -53,12 +53,11 @@ app.post(
     const user = request.body
 
     try {
-      const existingUsers = (
-        await pool.query<User>(
-          'SELECT name, email, password FROM user_account WHERE email = $1;',
-          [user.email]
-        )
-      ).rows
+      const queryResult = await pool.query<User>(
+        'SELECT name, email, password FROM user_account WHERE email = $1;',
+        [user.email]
+      )
+      const existingUsers = queryResult.rows
 
       if (existingUsers[0] !== undefined) {
         response
@@ -72,7 +71,7 @@ app.post(
         [user.name, user.email, user.password]
       )
       response.status(201).send()
-    } catch (error: unknown) {
+    } catch {
       response.status(500).send({})
     }
   }
