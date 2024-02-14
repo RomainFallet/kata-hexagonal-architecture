@@ -50,7 +50,7 @@ app.post(
   '/users',
   validator.validate({ body: userSchema }),
   async (request: Request<unknown, unknown, User>, response: Response) => {
-    const user: User = request.body
+    const user = request.body
 
     try {
       const existingUsers = (
