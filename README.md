@@ -7,6 +7,7 @@
   - [Mission 1](#mission-1)
   - [Mission 2](#mission-2)
   - [Mission 3](#mission-3)
+  - [Mission 4](#mission-4)
 
 ## Prerequisites
 
@@ -224,5 +225,9 @@ instead of a PostgreSQL database.
 
 ### Mission 3
 
-Finally, you'll have to create a new application that uses Fastify instead of ExpressJS as
+In this mission, you'll have to create a new application that uses Fastify instead of ExpressJS as
 your HTTP library to demonstrate that your business or storage logic is not tied to any application technology.
+
+### Mission 4
+
+Finally, implement this new business need: we want users to confirm their password before persisting them in the system. The contact form will now send a password confirmation that must match the password to complete the subscription.
