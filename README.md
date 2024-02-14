@@ -78,6 +78,9 @@ sudo apt update
 
 # Install PostgreSQL 16
 sudo apt install -y 'postgresql-16'
+
+# Define admin password
+sudo su --command "psql --command \"ALTER USER postgres PASSWORD 'postgres';\"" - postgres
 ```
 
 **MacOS:**
@@ -91,6 +94,9 @@ brew link postgresql@16
 
 # Start PostgreSQL 16 as a daemon
 brew services start postgresql@16
+
+# Define admin password
+psql --dbname postgres "ALTER USER postgres PASSWORD 'postgres';"
 ```
 
 **Windows:**
