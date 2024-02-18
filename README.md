@@ -126,28 +126,28 @@ Then, restart your PowerShell to be able to execute the "psql" command.
 
 ```bash
 # Create database
-sudo su --command "psql --command \"CREATE DATABASE hexagonal_architecture_db ENCODING UTF8;\"" - postgres
+sudo su --command "psql --command \"CREATE DATABASE \"hexagonal_architecture_db\" ENCODING UTF8;\"" - postgres
 
 # Create user
-sudo su --command "psql --command \"CREATE ROLE hexagonal_architecture_user WITH LOGIN PASSWORD 'hexagonal_architecture_password';\"" - postgres
+sudo su --command "psql --command \"CREATE ROLE \"hexagonal_architecture_user\" WITH LOGIN PASSWORD 'hexagonal_architecture_password';\"" - postgres
 
 # Make the user owner of the database & grant him all privileges
-sudo su --command "psql --command \"ALTER DATABASE hexagonal_architecture_db OWNER TO hexagonal_architecture_user;\"" - postgres
-sudo su --command "psql --command \"GRANT ALL PRIVILEGES ON DATABASE hexagonal_architecture_db to hexagonal_architecture_user;\"" - postgres
+sudo su --command "psql --command \"ALTER DATABASE \"hexagonal_architecture_db\" OWNER TO \"hexagonal_architecture_user\";\"" - postgres
+sudo su --command "psql --command \"GRANT ALL PRIVILEGES ON DATABASE \"hexagonal_architecture_db\" to \"hexagonal_architecture_user\";\"" - postgres
 ```
 
 **MacOS:**
 
 ```bash
 # Create database
-psql --dbname postgres --command "CREATE DATABASE hexagonal_architecture_db ENCODING UTF8;"
+psql --dbname postgres --command "CREATE DATABASE \"hexagonal_architecture_db\" ENCODING UTF8;"
 
 # Create user
-psql --dbname postgres --command "CREATE ROLE hexagonal_architecture_user WITH LOGIN PASSWORD 'hexagonal_architecture_password';"
+psql --dbname postgres --command "CREATE ROLE \"hexagonal_architecture_user\" WITH LOGIN PASSWORD 'hexagonal_architecture_password';"
 
 # Make the user owner of the database & grant him all privileges
-psql --dbname postgres --command "ALTER DATABASE hexagonal_architecture_db OWNER TO hexagonal_architecture_user;"
-psql --dbname postgres --command "GRANT ALL PRIVILEGES ON DATABASE hexagonal_architecture_db to hexagonal_architecture_user;"
+psql --dbname postgres --command "ALTER DATABASE \"hexagonal_architecture_db\" OWNER TO \"hexagonal_architecture_user\";"
+psql --dbname postgres --command "GRANT ALL PRIVILEGES ON DATABASE \"hexagonal_architecture_db\" to \"hexagonal_architecture_user\";"
 ```
 
 **Windows:**
@@ -156,14 +156,14 @@ The password to use by default is 'postgres'.
 
 ```powershell
 # Create database
-psql --username postgres --command "CREATE DATABASE hexagonal_architecture_db ENCODING UTF8;"
+psql --username postgres --command "CREATE DATABASE \"hexagonal_architecture_db\" ENCODING UTF8;"
 
 # Create user
-psql --username postgres --command "CREATE ROLE hexagonal_architecture_user WITH LOGIN PASSWORD 'hexagonal_architecture_password';"
+psql --username postgres --command "CREATE ROLE \"hexagonal_architecture_user\" WITH LOGIN PASSWORD 'hexagonal_architecture_password';"
 
 # Make the user owner of the database & grant him all privileges
-psql --username postgres --command "ALTER DATABASE hexagonal_architecture_db OWNER TO hexagonal_architecture_user;"
-psql --username postgres --command "GRANT ALL PRIVILEGES ON DATABASE hexagonal_architecture_db to hexagonal_architecture_user;"
+psql --username postgres --command "ALTER DATABASE \"hexagonal_architecture_db\" OWNER TO \"hexagonal_architecture_user\";"
+psql --username postgres --command "GRANT ALL PRIVILEGES ON DATABASE \"hexagonal_architecture_db\" to \"hexagonal_architecture_user\";"
 ```
 
 ## Installation
