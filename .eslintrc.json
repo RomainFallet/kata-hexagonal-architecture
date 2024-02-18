@@ -26,13 +26,15 @@
         }
       },
       "rules": {
+        "unicorn/no-null": "off",
+
         "node/no-missing-import": "off",
 
         "import/no-deprecated": "error",
         "import/no-empty-named-blocks": "error",
         "import/no-extraneous-dependencies": [
           "error",
-          { "devDependencies": ["**/*.spec.ts"] }
+          { "devDependencies": ["*.spec.ts", "src/e2e/*.ts"] }
         ],
         "import/no-mutable-exports": "error",
         "import/no-unused-modules": "error",

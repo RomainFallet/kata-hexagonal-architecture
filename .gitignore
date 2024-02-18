@@ -3,3 +3,4 @@ dist
 tsconfig.tsbuildinfo
 .eslintcache
 .env
+.env.e2e

@@ -2,6 +2,7 @@
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Tests](#tests)
 - [Usage](#usage)
 - [Getting started](#getting-started)
   - [Mission 1](#mission-1)
@@ -189,7 +190,25 @@ HEXAGONAL_ARCHITECTURE_DB_NAME=hexagonal_architecture_db
 Finally, execute database migrations:
 
 ```bash
-npx db-migrate --env db up
+npm run db-migrate:up
+```
+## Tests
+
+[Back to top ↑](#kata-hexagonal-architecture)
+
+To execute end to end tests, create a `./.env.e2e` file containing:
+
+```txt
+ADMIN_DB_HOSTNAME=localhost
+ADMIN_DB_USER=postgres
+ADMIN_DB_PASSWORD=postgres
+ADMIN_DB_NAME=postgres
+```
+
+Then run:
+
+```bash
+npm run test:e2e
 ```
 
 ## Usage

@@ -1,1 +1,2 @@
-src/**/*.spec.ts
+*.spec.ts
+src/e2e/*.ts
