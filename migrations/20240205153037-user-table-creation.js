@@ -1,11 +1,12 @@
 'use strict'
 
-var dbm
-var type
-var seed
-var fs = require('fs')
-var path = require('path')
-var Promise
+let dbm
+let type
+let seed
+const fs = require('node:fs')
+const path = require('node:path')
+
+let Promise
 
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
@@ -18,39 +19,39 @@ exports.setup = function (options, seedLink) {
   Promise = options.Promise
 }
 
-exports.up = function (db) {
-  var filePath = path.join(
+exports.up = function (database) {
+  const filePath = path.join(
     __dirname,
     'sqls',
     '20240205153037-user-table-creation-up.sql'
   )
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
-      if (err) return reject(err)
+    fs.readFile(filePath, { encoding: 'utf-8' }, function (error, data) {
+      if (error) return reject(error)
       console.log('received data: ' + data)
 
       resolve(data)
     })
   }).then(function (data) {
-    return db.runSql(data)
+    return database.runSql(data)
   })
 }
 
-exports.down = function (db) {
-  var filePath = path.join(
+exports.down = function (database) {
+  const filePath = path.join(
     __dirname,
     'sqls',
     '20240205153037-user-table-creation-down.sql'
   )
   return new Promise(function (resolve, reject) {
-    fs.readFile(filePath, { encoding: 'utf-8' }, function (err, data) {
-      if (err) return reject(err)
+    fs.readFile(filePath, { encoding: 'utf-8' }, function (error, data) {
+      if (error) return reject(error)
       console.log('received data: ' + data)
 
       resolve(data)
     })
   }).then(function (data) {
-    return db.runSql(data)
+    return database.runSql(data)
   })
 }
 
