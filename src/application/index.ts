@@ -66,19 +66,19 @@ usersRouter.post(
     }
 
     try {
-      const insertResult = await databasePool.query(
+      const insertResult = await databasePool.query<{ id: string }>(
         'INSERT INTO user_account(name, email, password, age) VALUES($1, $2, $3, $4) ON CONFLICT (email) DO NOTHING RETURNING id;',
         [user.name, user.email, user.password, user.age]
       )
 
-      if (insertResult.rowCount === 0) {
+      if (insertResult.rows[0] === undefined) {
         response
           .status(400)
           .send({ error: 'An user with this email address already exists' })
         return
       }
 
-      response.status(201).send()
+      response.status(200).send(insertResult.rows[0])
     } catch (error: unknown) {
       console.error(error)
       response.status(500).send()

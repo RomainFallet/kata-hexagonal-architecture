@@ -41,7 +41,7 @@ describe('POST /users', () => {
       //   userMock.email
       // )
       // strictEqual(responseBody, '')
-      // strictEqual(response.status, 201)
+      // strictEqual(response.status, 200)
       // deepStrictEqual(createdUser, expectedUser)
     } finally {
       // await cleanTestEnvironment(testEnvironment)
