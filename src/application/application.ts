@@ -43,7 +43,8 @@ const userSchema: JSONSchema7 = {
 const application = (databasePool: Pool): Express => {
   const applicationInstance = express()
 
-  applicationInstance.post(
+  const usersRouter = express.Router()
+  usersRouter.post(
     '/users',
     bodyParser.json(),
     validator.validate({ body: userSchema }),
@@ -90,6 +91,8 @@ const application = (databasePool: Pool): Express => {
       }
     }
   )
+
+  applicationInstance.use(usersRouter)
 
   return applicationInstance
 }
