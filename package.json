@@ -19,7 +19,8 @@
     "clean:typescript": "del ./tsconfig.tsbuildinfo",
     "clean:build": "del ./dist",
     "clean": "npm-run-all --parallel clean:*",
-    "test:e2e": "node --env-file ./.env.e2e --test-reporter spec --test ./dist/e2e/*.spec.js",
+    "test:e2e:run": "node --env-file ./.env.e2e --test-reporter spec --test ./dist/e2e/*.spec.js",
+    "test:e2e": "npm-run-all build test:e2e:run",
     "db-migrate:up": "db-migrate --env db up",
     "db-migrate:down": "db-migrate --env db down"
   },
