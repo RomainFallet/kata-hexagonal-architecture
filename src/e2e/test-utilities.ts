@@ -37,6 +37,7 @@ type TestUser = {
   name: string
   email: string
   password: string
+  age: number
 }
 
 const generateTestDatabaseCredentials = (): TestDatabaseCredentials => {
@@ -198,7 +199,7 @@ const getUserFromDatabase = async (
   email: string
 ): Promise<TestUser | null> => {
   const queryResult = await pool.query<TestUser>(
-    'SELECT email, name, password FROM "user_account" WHERE email = $1;',
+    'SELECT email, name, password, age FROM "user_account" WHERE email = $1;',
     [email]
   )
   return queryResult.rows[0] ?? null

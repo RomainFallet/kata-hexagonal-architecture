@@ -30,7 +30,8 @@ describe('POST /users', () => {
       const userMock: User = {
         email: faker.internet.email().toLowerCase(),
         name: faker.person.fullName(),
-        password: faker.internet.password({ length: 30 })
+        password: faker.internet.password({ length: 30 }),
+        age: 20
       }
 
       // Act

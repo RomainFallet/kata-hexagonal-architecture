@@ -13,6 +13,7 @@ type User = {
   name: string
   email: string
   password: string
+  age: number
 }
 
 const validator = new Validator({ strict: true })
@@ -32,6 +33,9 @@ const userSchema: JSONSchema7 = {
       type: 'string',
       minLength: 20,
       maxLength: 100
+    },
+    age: {
+      type: 'number'
     }
   }
 }
@@ -46,10 +50,17 @@ const application = (databasePool: Pool): Express => {
     async (request: Request<unknown, unknown, User>, response: Response) => {
       const user = request.body
 
+      if (user.age < 15) {
+        response
+          .status(400)
+          .send({ error: 'User must be older than 15 years old' })
+        return
+      }
+
       try {
         const insertResult = await databasePool.query(
-          'INSERT INTO user_account(name, email, password) VALUES($1, $2, $3) ON CONFLICT DO NOTHING;',
-          [user.name, user.email, user.password]
+          'INSERT INTO user_account(name, email, password, age) VALUES($1, $2, $3, $4) ON CONFLICT (email) DO NOTHING RETURNING id;',
+          [user.name, user.email, user.password, user.age]
         )
 
         if (insertResult.rowCount === 0) {
@@ -60,8 +71,9 @@ const application = (databasePool: Pool): Express => {
         }
 
         response.status(201).send()
-      } catch {
-        response.status(500).send({})
+      } catch (error: unknown) {
+        console.error(error)
+        response.status(500).send()
       }
     },
     (
