@@ -18,7 +18,7 @@ type User = {
 const validator = new Validator({ strict: true })
 const userSchema: JSONSchema7 = {
   type: 'object',
-  required: ['name', 'email', 'password'],
+  required: ['name', 'email', 'password', 'age'],
   properties: {
     name: {
       type: 'string',
