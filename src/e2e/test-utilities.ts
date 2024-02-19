@@ -204,6 +204,17 @@ const cleanTestEnvironment = async (
   await testEnvironment.administratorDatabasePool.end()
 }
 
+const getUsersFromDatabase = async (
+  pool: Pool,
+  email: string
+): Promise<TestUser[]> => {
+  const queryResult = await pool.query<TestUser>(
+    'SELECT email, name, password, age FROM "user_account" WHERE email = $1;',
+    [email]
+  )
+  return queryResult.rows
+}
+
 const getUserFromDatabase = async (
   pool: Pool,
   email: string
@@ -215,9 +226,21 @@ const getUserFromDatabase = async (
   return queryResult.rows[0] ?? null
 }
 
+const saveUserInDatabase = async (
+  pool: Pool,
+  user: TestUser
+): Promise<void> => {
+  await pool.query<TestUser>(
+    'INSERT INTO user_account(email, name, password, age) VALUES($1, $2, $3, $4);',
+    [user.email, user.name, user.password, user.age]
+  )
+}
+
 export {
   cleanTestEnvironment,
   getUserFromDatabase,
+  getUsersFromDatabase,
+  saveUserInDatabase,
   setupTestEnvironment,
   type TestDatabase,
   type TestDatabaseCredentials
