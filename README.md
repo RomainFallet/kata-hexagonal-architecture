@@ -93,6 +93,10 @@ npm test
 This application is strongly coupled: presentation, business logic and storage
 layers all live in the same file without any separation of concerns.
 
+### Mission 0
+
+Add e2e tests that validate the current behavior of existing application to ensure your refactor does not break anything.
+
 ### Mission 1
 
 Your first mission is to transform it using the principles of hexagonal architecture:
