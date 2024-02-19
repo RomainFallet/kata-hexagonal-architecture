@@ -47,31 +47,23 @@ const application = (databasePool: Pool): Express => {
       const user = request.body
 
       try {
-        const queryResult = await databasePool.query<User>(
-          'SELECT name, email, password FROM user_account WHERE email = $1;',
-          [user.email]
+        const insertResult = await databasePool.query(
+          'INSERT INTO user_account(name, email, password) VALUES($1, $2, $3) ON CONFLICT DO NOTHING;',
+          [user.name, user.email, user.password]
         )
-        const existingUsers = queryResult.rows
 
-        if (existingUsers[0] !== undefined) {
+        if (insertResult.rowCount === 0) {
           response
             .status(400)
             .send({ error: 'An user with this email address already exists' })
           return
         }
 
-        await databasePool.query(
-          'INSERT INTO user_account(name, email, password) VALUES($1, $2, $3);',
-          [user.name, user.email, user.password]
-        )
         response.status(201).send()
       } catch {
         response.status(500).send({})
       }
-    }
-  )
-
-  applicationInstance.use(
+    },
     (
       error: unknown,
       request: Request,
