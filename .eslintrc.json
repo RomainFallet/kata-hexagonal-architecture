@@ -27,6 +27,10 @@
       },
       "rules": {
         "unicorn/no-null": "off",
+        "unicorn/consistent-function-scoping": [
+          "error",
+          { "checkArrowFunctions": false }
+        ],
 
         "node/no-missing-import": "off",
 
