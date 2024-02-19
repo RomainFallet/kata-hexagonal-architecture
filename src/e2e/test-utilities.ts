@@ -31,6 +31,7 @@ type TestApplication = {
 type TestEnvironment = {
   readonly database: TestDatabase
   readonly application: TestApplication
+  readonly administratorDatabasePool: Pool
 }
 
 type TestUser = {
@@ -174,24 +175,33 @@ const getFreeHttpPort = (): Promise<number> => {
 }
 
 const setupTestEnvironment = async (
-  administratorDatabasePool: Pool,
   application: (pool: Pool) => Express
 ): Promise<TestEnvironment> => {
+  const administratorDatabasePool = new pg.Pool({
+    host: process.env.ADMIN_DB_HOSTNAME,
+    user: process.env.ADMIN_DB_USER,
+    password: process.env.ADMIN_DB_PASSWORD,
+    database: process.env.ADMIN_DB_NAME
+  })
   const testDatabase = await createTestDatabase(administratorDatabasePool)
   const testApplication = await startApplication(application(testDatabase.pool))
 
   return {
     database: testDatabase,
-    application: testApplication
+    application: testApplication,
+    administratorDatabasePool
   }
 }
 
 const cleanTestEnvironment = async (
-  administratorDatabasePool: Pool,
   testEnvironment: TestEnvironment
 ): Promise<void> => {
   stopApplication(testEnvironment.application.httpServer)
-  await cleanTestDatabase(administratorDatabasePool, testEnvironment.database)
+  await cleanTestDatabase(
+    testEnvironment.administratorDatabasePool,
+    testEnvironment.database
+  )
+  await testEnvironment.administratorDatabasePool.end()
 }
 
 const getUserFromDatabase = async (
