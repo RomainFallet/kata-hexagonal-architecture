@@ -126,16 +126,6 @@ const stopApplication = (httpServer: HttpServer): void => {
   httpServer.close()
 }
 
-const generateArrayOfNumbers = (
-  startNumber: number,
-  endNumber: number
-): number[] => {
-  return Array.from(
-    { length: endNumber - startNumber + 1 },
-    (_, a) => a + startNumber
-  )
-}
-
 const isHttpPortFree = async (port: number): Promise<boolean> => {
   return await new Promise((resolve, reject) => {
     const httpServer = createServer()
@@ -155,19 +145,24 @@ const isHttpPortFree = async (port: number): Promise<boolean> => {
   })
 }
 
+const getRandomNumberInRange = (
+  startRange: number,
+  endRange: number
+): number => {
+  return Math.floor(Math.random() * (endRange - startRange + 1)) + startRange
+}
+
 const getFreeHttpPortOnRange = async (
   startRange: number,
   endRange: number
 ): Promise<number> => {
-  const ports = generateArrayOfNumbers(startRange, endRange)
+  const port = getRandomNumberInRange(startRange, endRange)
 
-  for (const port of ports) {
-    if (await isHttpPortFree(port)) {
-      return port
-    }
+  if (!(await isHttpPortFree(port))) {
+    return await getFreeHttpPortOnRange(startRange, endRange)
   }
 
-  throw new Error('Unable to find a free http port of the specified range')
+  return port
 }
 
 const getFreeHttpPort = (): Promise<number> => {
@@ -236,12 +231,49 @@ const saveUserInDatabase = async (
   )
 }
 
+type JsonContent = readonly unknown[] | Record<string, unknown>
+
+const parseJsonContent = (jsonContent: string): JsonContent => {
+  const parsedJsonContent = JSON.parse(jsonContent)
+
+  if (Array.isArray(parsedJsonContent)) {
+    return parsedJsonContent as readonly unknown[]
+  }
+
+  return parsedJsonContent as Record<string, unknown>
+}
+
+const hasKey = (object: JsonContent, key: string): boolean => {
+  return Object.keys(object).includes(key)
+}
+
+type TestHttpClient = {
+  postJson: (urlPath: string, jsonContent: JsonContent) => Promise<Response>
+}
+
+const testHttpClient = (baseUrl: string): TestHttpClient => {
+  return {
+    postJson: (urlPath: string, jsonContent: JsonContent) => {
+      return fetch(`${baseUrl}${urlPath}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonContent)
+      })
+    }
+  }
+}
+
 export {
   cleanTestEnvironment,
   getUserFromDatabase,
   getUsersFromDatabase,
+  hasKey,
+  parseJsonContent,
   saveUserInDatabase,
   setupTestEnvironment,
   type TestDatabase,
-  type TestDatabaseCredentials
+  type TestDatabaseCredentials,
+  testHttpClient
 }
