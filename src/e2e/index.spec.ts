@@ -6,21 +6,20 @@ import {
   application,
   type User
 } from '../applications/express-users-management/application.js'
-
 import {
-  cleanTestEnvironment,
+  cleanEndToEndTestEnvironment,
   getUserFromDatabase,
   getUsersFromDatabase,
   hasKey,
   parseJsonContent,
   saveUserInDatabase,
-  setupTestEnvironment,
+  setupEndToEndTestEnvironment,
   testHttpClient
-} from './test-utilities.js'
+} from '../test-utilities/index.js'
 
 describe('POST /users', { concurrency: 10 }, () => {
   it('should create a new user', async () => {
-    const testEnvironment = await setupTestEnvironment(application)
+    const testEnvironment = await setupEndToEndTestEnvironment(application)
 
     try {
       // Arrange
@@ -47,12 +46,12 @@ describe('POST /users', { concurrency: 10 }, () => {
       strictEqual(response.status, 200)
       deepStrictEqual(createdUser, userMock)
     } finally {
-      await cleanTestEnvironment(testEnvironment)
+      await cleanEndToEndTestEnvironment(testEnvironment)
     }
   })
 
   it('should return an error if user is too young', async () => {
-    const testEnvironment = await setupTestEnvironment(application)
+    const testEnvironment = await setupEndToEndTestEnvironment(application)
 
     try {
       // Arrange
@@ -81,12 +80,12 @@ describe('POST /users', { concurrency: 10 }, () => {
       strictEqual(response.status, 400)
       deepStrictEqual(createdUser, null)
     } finally {
-      await cleanTestEnvironment(testEnvironment)
+      await cleanEndToEndTestEnvironment(testEnvironment)
     }
   })
 
   it('should return an error if user is already registered', async () => {
-    const testEnvironment = await setupTestEnvironment(application)
+    const testEnvironment = await setupEndToEndTestEnvironment(application)
 
     try {
       // Arrange
@@ -122,7 +121,7 @@ describe('POST /users', { concurrency: 10 }, () => {
       strictEqual(response.status, 400)
       deepStrictEqual(createdUsers, [existingUserMock])
     } finally {
-      await cleanTestEnvironment(testEnvironment)
+      await cleanEndToEndTestEnvironment(testEnvironment)
     }
   })
 })

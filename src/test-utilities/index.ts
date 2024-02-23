@@ -169,7 +169,7 @@ const getFreeHttpPort = (): Promise<number> => {
   return getFreeHttpPortOnRange(3000, 3999)
 }
 
-const setupTestEnvironment = async (
+const setupEndToEndTestEnvironment = async (
   application: (pool: Pool) => Express
 ): Promise<TestEnvironment> => {
   const administratorDatabasePool = new pg.Pool({
@@ -188,7 +188,7 @@ const setupTestEnvironment = async (
   }
 }
 
-const cleanTestEnvironment = async (
+const cleanEndToEndTestEnvironment = async (
   testEnvironment: TestEnvironment
 ): Promise<void> => {
   stopApplication(testEnvironment.application.httpServer)
@@ -266,13 +266,13 @@ const testHttpClient = (baseUrl: string): TestHttpClient => {
 }
 
 export {
-  cleanTestEnvironment,
+  cleanEndToEndTestEnvironment,
   getUserFromDatabase,
   getUsersFromDatabase,
   hasKey,
   parseJsonContent,
   saveUserInDatabase,
-  setupTestEnvironment,
+  setupEndToEndTestEnvironment,
   type TestDatabase,
   type TestDatabaseCredentials,
   testHttpClient

@@ -41,7 +41,8 @@
           {
             "devDependencies": [
               "src/application/**/*.spec.ts",
-              "src/e2e/**/*.ts"
+              "src/e2e/**/*.ts",
+              "src/test-utilities/**/*.ts"
             ]
           }
         ],
