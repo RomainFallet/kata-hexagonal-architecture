@@ -90,7 +90,8 @@ brew link postgresql@16
 brew services start postgresql@16
 
 # Define admin password
-psql --dbname postgres "ALTER USER postgres PASSWORD 'postgres';"
+# /!\ On MacOS, the admin username is your computer account username
+psql --username "$(whoami)" --dbname postgres --command "ALTER USER $(whoami) PASSWORD 'postgres';"
 ```
 
 **Windows:**
