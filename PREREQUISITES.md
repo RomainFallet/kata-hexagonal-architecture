@@ -1,7 +1,7 @@
 # Prerequisites
 
 - [Systems and package manager](#systems-and-package-manager)
-- [NodeJS v20](#nodejs-v20)
+- [NodeJS v21](#nodejs-v21)
 - [PostgreSQL v16](#postgresql-v16)
 - [Create a local PostgreSQL database](#create-a-local-postgresql-database)
 
@@ -21,7 +21,7 @@ Ensure your are on version 14 or superior and install the [HomeBrew](https://bre
 
 Ensure you are in version 10 or superior and ensure [Winget](https://apps.microsoft.com/detail/9NBLGGH4NNS1?rtc=1&hl=fr-fr&gl=FR#activetab=pivot:overviewtab) package manager is up to date.
 
-## NodeJS v20
+## NodeJS v21
 
 [Back to top ↑](#prerequisites)
 
@@ -29,20 +29,20 @@ Ensure you are in version 10 or superior and ensure [Winget](https://apps.micros
 
 ```bash
 # Add NodeJS repository, GPG key and update APT repository
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
 
-# Install NodeJS 20
+# Install NodeJS 21
 sudo apt install -y nodejs
 ```
 
 **MacOS:**
 
 ```bash
-# Install NodeJS 20
-brew install node@20
+# Install NodeJS 21
+brew install node@21
 
-# Make NodeJS 20 binaries available globally
-brew link node@20
+# Make NodeJS 21 binaries available globally
+brew link node@21
 ```
 
 **Windows:**
@@ -51,7 +51,7 @@ Run the following in an elevated PowerShell.
 
 ```powershell
 # Install NodeJS 20
-winget install OpenJS.NodeJS.LTS --version 20.10.0 --source winget
+winget install OpenJS.NodeJS.LTS --version 21.6.2 --source winget
 ```
 
 ## PostgreSQL v16

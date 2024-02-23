@@ -3,9 +3,10 @@
   "license": "UNLICENSED",
   "private": true,
   "engines": {
-    "node": "^20.0.0",
+    "node": "^21.0.0",
     "npm": "^10.0.0"
   },
+  "engineStrict": true,
   "type": "module",
   "scripts": {
     "prepare": "husky install",
@@ -19,7 +20,7 @@
     "clean:typescript": "del ./tsconfig.tsbuildinfo",
     "clean:build": "del ./dist",
     "clean": "npm-run-all --parallel clean:*",
-    "test:run": "node --test ./dist/application/**/**/*.spec.js",
+    "test:run": "node --test ./dist/application/**/*.spec.js",
     "test": "npm-run-all build test:run",
     "test:e2e:run": "node --env-file ./.env.e2e --test ./dist/e2e/*.spec.js",
     "test:e2e": "npm-run-all build test:e2e:run",
