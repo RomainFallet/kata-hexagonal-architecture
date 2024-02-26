@@ -6,9 +6,6 @@
 - [Usage](#usage)
 - [Getting started](#getting-started)
   - [Mission 1](#mission-1)
-  - [Mission 2](#mission-2)
-  - [Mission 3](#mission-3)
-  - [Mission 4](#mission-4)
 
 ## Prerequisites
 
@@ -93,26 +90,7 @@ npm test
 This application is strongly coupled: presentation, business logic and storage
 layers all live in the same file without any separation of concerns.
 
-### Mission 0
-
-Add e2e tests that validate the current behavior of existing application to ensure your refactor does not break anything.
-
 ### Mission 1
 
-Your first mission is to transform it using the principles of hexagonal architecture:
-you must isolate the business logic from the technical details.
-
-### Mission 2
-
-Then, you'll have to create a new storage adapter to allow users to be stored in memory
-instead of a PostgreSQL database.
-
-### Mission 3
-
-In this mission, implement this new business need: we want users to confirm their password before persisting them in the system. The contact form will now send a password confirmation that must match the password to complete the subscription.
-
-### Mission 4
-
-Finally, you'll have to create a new application that uses Fastify instead of ExpressJS as
-your HTTP library to demonstrate that your business or storage logic is not tied to any application technology.
+Your first mission is to extract a domain layer in `./domains/users-management` using the principles of hexagonal architecture.
 
